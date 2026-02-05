@@ -1,0 +1,197 @@
+:root{
+  --bg: #0b0d12;
+  --panel: rgba(255,255,255,0.06);
+  --text: rgba(255,255,255,0.92);
+  --muted: rgba(255,255,255,0.65);
+  --stroke: rgba(255,255,255,0.14);
+  --accent: #7ee7ff;
+  --edge: #a6ff7e;
+  --regen: #7ee7ff;
+}
+
+*{ box-sizing:border-box; }
+html,body{ height:100%; }
+
+body{
+  margin:0;
+  background:
+    radial-gradient(1200px 700px at 30% 10%, rgba(126,231,255,0.10), transparent 60%),
+    radial-gradient(900px 600px at 80% 0%, rgba(166,255,126,0.08), transparent 55%),
+    var(--bg);
+  color:var(--text);
+  font:14px/1.4 system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* ---------- Top Bar ---------- */
+
+.topbar{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:14px;
+  padding:14px 16px;
+  border-bottom:1px solid var(--stroke);
+  background:linear-gradient(to bottom, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+  position:sticky;
+  top:0;
+  z-index:5;
+}
+
+.brand{ display:flex; align-items:center; gap:12px; }
+
+.logo{
+  width:34px;
+  height:34px;
+  border-radius:10px;
+  background:linear-gradient(135deg, var(--accent), var(--edge));
+  box-shadow:0 12px 30px rgba(0,0,0,0.35);
+}
+
+.title{ font-weight:800; }
+.subtitle{ font-size:12px; color:var(--muted); }
+
+/* ---------- HUD ---------- */
+
+.hud{
+  display:flex;
+  flex-wrap:wrap;
+  gap:10px;
+  justify-content:center;
+}
+
+.pill{
+  display:flex;
+  gap:8px;
+  align-items:baseline;
+  padding:8px 12px;
+  border:1px solid var(--stroke);
+  background:rgba(255,255,255,0.04);
+  border-radius:999px;
+}
+
+.pill span{ font-size:12px; color:var(--muted); }
+.pill strong{ font-size:14px; }
+
+/* ---------- Buttons ---------- */
+
+.controls{ display:flex; gap:10px; }
+
+.btn{
+  border:1px solid rgba(126,231,255,0.35);
+  background:rgba(126,231,255,0.10);
+  color:var(--text);
+  padding:9px 12px;
+  border-radius:10px;
+  cursor:pointer;
+  font-weight:700;
+}
+
+.btn:hover{ background:rgba(126,231,255,0.16); }
+
+.btn.secondary{
+  border:1px solid rgba(255,255,255,0.18);
+  background:rgba(255,255,255,0.06);
+}
+
+/* ---------- Layout ---------- */
+
+.main{
+  display:grid;
+  grid-template-columns:1fr 320px;
+  gap:14px;
+  padding:14px;
+  max-width:1500px;
+  margin:0 auto;
+}
+
+.gameWrap{
+  position:relative;
+  border:1px solid var(--stroke);
+  border-radius:18px;
+  overflow:hidden;
+  background:rgba(0,0,0,0.25);
+  box-shadow:0 24px 70px rgba(0,0,0,0.35);
+}
+
+/* Canvas must ALWAYS have height */
+canvas{
+  display:block;
+  width:100%;
+  height:calc(100vh - 160px);
+  min-height:520px;
+}
+
+/* ---------- Overlay ---------- */
+
+.overlay{
+  position:absolute;
+  inset:0;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  background:rgba(0,0,0,0.55);
+  backdrop-filter:blur(6px);
+}
+
+/* THIS IS CRITICAL — prevents blocking gameplay */
+.overlay[hidden]{
+  display:none !important;
+  pointer-events:none;
+}
+
+.card{
+  width:min(520px,92%);
+  padding:16px;
+  border-radius:18px;
+  background:rgba(12,14,18,0.92);
+  border:1px solid var(--stroke);
+}
+
+.help{
+  margin-top:12px;
+  color:var(--muted);
+  display:grid;
+  gap:6px;
+}
+
+kbd{
+  padding:2px 6px;
+  border-radius:6px;
+  border:1px solid rgba(255,255,255,0.18);
+  background:rgba(255,255,255,0.06);
+  font-weight:700;
+}
+
+/* ---------- Sidebar ---------- */
+
+.panel{
+  border:1px solid var(--stroke);
+  border-radius:18px;
+  padding:14px;
+  background:rgba(255,255,255,0.04);
+}
+
+.legend{
+  display:flex;
+  gap:12px;
+  margin-top:10px;
+  flex-wrap:wrap;
+}
+
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  display:inline-block;
+}
+
+.dot.player{ background:var(--accent); }
+.dot.enemy{ background:#ff7ea6; }
+.dot.edge{ background:var(--edge); }
+.dot.regen{ background:var(--regen); }
+.dot.wave{ background:#b26bff; }
+
+@media (max-width:980px){
+  .main{ grid-template-columns:1fr; }
+  canvas{ height:70vh; min-height:460px; }
+}

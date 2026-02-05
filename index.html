@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Polygon Parts Arena</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <div class="logo"></div>
+      <div>
+        <div class="title">Polygon Parts Arena</div>
+        <div class="subtitle">Collect parts → add edges → become more circle-like → stronger stats</div>
+      </div>
+    </div>
+
+    <div class="hud">
+      <div class="pill"><span>Edges</span><strong id="edges">4</strong></div>
+      <div class="pill"><span>Attack</span><strong id="atk">10</strong></div>
+      <div class="pill"><span>Defense</span><strong id="def">10</strong></div>
+      <div class="pill"><span>Plasma</span><strong id="plasma">0</strong></div>
+      <div class="pill"><span>Wave</span><strong id="wave">0</strong></div>
+      <div class="pill"><span>HP</span><strong id="hp">100</strong></div>
+      <div class="pill"><span>KOs</span><strong id="kos">0</strong></div>
+      <div class="pill"><span>Parts</span><strong id="parts">0</strong></div>
+      
+      <div class="pill"><span>Bot</span><strong id="bot">Alive</strong></div>
+    </div>
+
+    <div class="controls">
+      <button id="btnPause" class="btn">Pause</button>
+      <button id="btnReset" class="btn secondary">Reset</button>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="gameWrap">
+      <canvas id="game" width="1100" height="650" aria-label="Game canvas"></canvas>
+
+      <!-- Overlay should ONLY show when paused -->
+      <div class="overlay" id="overlay" hidden>
+        <div class="card">
+          <h2 id="overlayTitle">Paused</h2>
+          <p id="overlayText">Press <kbd>P</kbd> or click Resume.</p>
+          <div class="row">
+            <button id="btnResume" class="btn">Resume</button>
+            <button id="btnHardReset" class="btn secondary">Reset</button>
+          </div>
+          <div class="help">
+            <div><kbd>W A S D</kbd> or <kbd>Arrow Keys</kbd> to move</div>
+            <div><kbd>Space</kbd> to dash</div>
+            <div><kbd>P</kbd> to pause</div>
+            <div>
+              Pickups:
+              <span class="chip edge"></span> edge parts,
+              <span class="chip regen"></span> regen parts,
+              plasma unlocks after <strong>26 edges</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <aside class="panel">
+      <h3>How it works</h3>
+      <ul>
+        <li>You start as a <strong>square</strong> (4 edges).</li>
+        <li>Collect <strong>edge parts</strong> to add edges up to <strong>26</strong>.</li>
+        <li>After <strong>26 edges</strong>, edge parts start building <strong>Plasma</strong> (blades) → increases <strong>Attack only</strong>.</li>
+        <li><strong>Plasma damage:</strong> first hit is <strong>3×</strong>, later hits are <strong>1×</strong>.</li>
+        <li><strong>Regen parts</strong> increase HP regeneration.</li>
+      </ul>
+
+      <div class="legend">
+        <div class="legendItem"><span class="dot player"></span> You</div>
+        <div class="legendItem"><span class="dot enemy"></span> Enemies</div>
+        <div class="legendItem"><span class="dot edge"></span> Edge part</div>
+        <div class="legendItem"><span class="dot regen"></span> Regen part</div>
+      </div>
+
+      <footer class="foot">
+        <small>Prototype: single-player with bots. Multiplayer can be added later.</small>
+      </footer>
+    </aside>
+  </main>
+
+  <script src="game.js"></script>
+</body>
+</html>
